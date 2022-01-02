@@ -23,14 +23,21 @@
         </div>
         <div class="field">
             <label for="pageCount">Number of pages:</label>
-            <input type="text" name="pageCount" placeholder="Enter number of pages" maxlength="5" id="pageCount" required>
+            <input type="number" name="pageCount" placeholder="Enter number of pages" min="1" max="100000" id="pageCount" required>
         </div>
         <div class="field checkbox">
             <label for="readStatus">Have you read it before?</label>
             <input type="checkbox" name="readStatus" id="readStatus">
         </div>
-        <button class="confirm-btn">Confirm</button>
+        <button type="submit" class="confirm-btn">Confirm</button>
     </form>
+    <div class="delete-book-form">
+        <h1 class="form-header">Delete?</h1>
+        <div class="delete-btns-container">
+            <button class="no-btn">No</button>
+            <button class="yes-btn">Yes</button>
+        </div>
+    </div>
     <header>
         <h1 class="page-title">Your Library</h1>
     </header>
