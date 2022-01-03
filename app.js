@@ -66,6 +66,7 @@ function createBook(bookObj) {
     // Read status of the book
     const bookReadStatus = document.createElement("button");
     bookReadStatus.textContent = bookObj.readStatus;
+    bookReadStatus.setAttribute("data-index", bookIndexCounter);
     bookContainer.style.background = bookObj.readStatus === "Read" 
                                         ? "linear-gradient(to right, #4cb860, #3cd3ad)"
                                         : "linear-gradient(to right, #3e5151, #decba4)";
@@ -118,11 +119,16 @@ function deleteBookHandler(e) {
 }
 
 function changeReadStatusHandler(e) {
-    const bookCard = e.target.parentElement
+    const bookCard = e.target.parentElement;
+    
+    const bookObj = myLibrary[e.target.getAttribute("data-index")];
+
     if (e.target.textContent === "Read") {
+        bookObj.readStatus = "Not Read";
         bookCard.style.background = "linear-gradient(to right, #3e5151, #decba4)";
         e.target.textContent = "Not Read";
     } else {
+        bookObj.readStatus = "Read";
         bookCard.style.background = "linear-gradient(to right, #4cb860, #3cd3ad)";
         e.target.textContent = "Read";
     }
