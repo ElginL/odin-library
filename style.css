@@ -40,10 +40,6 @@ main {
     padding: 10px 30px;
 }
 
-.add-book-btn:hover {
-    cursor: pointer;
-}
-
 .add-book-form,
 .delete-book-form {
     position: absolute;
@@ -91,7 +87,8 @@ main {
 
 .close-form-btn:hover,
 .delete-book-btn:hover,
-.delete-btns-container > button:hover {
+.delete-btns-container > button:hover,
+.add-book-btn:hover {
     cursor: pointer;
 }
 
@@ -138,7 +135,9 @@ main {
     width: 20px;
 }
 
-.field input[type="checkbox"]:hover {
+.field input[type="checkbox"]:hover,
+.book-container > button:hover,
+.confirm-btn:hover {
     cursor: pointer;
 }
 
@@ -146,10 +145,6 @@ main {
     align-self: center;
     padding: 5px 20px;
     font-size: 1.25rem;
-}
-
-.confirm-btn:hover {
-    cursor: pointer;
 }
 
 .books-section-title {
@@ -171,7 +166,7 @@ main {
     align-items: center;
     justify-content: space-evenly;
     height: 300px;
-    background: linear-gradient(to right, rgb(76, 184, 96), rgb(60, 211, 173));
+    background: linear-gradient(to right, #4cb860, #3cd3ad);
 }
 
 .book-container > h2 {
@@ -182,6 +177,7 @@ main {
     font-size: 1rem;
 }
 
-.book-container > p {
+.book-container > p,
+.book-container > button {
     font-size: 1.25rem;
 }

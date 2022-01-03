@@ -19,24 +19,16 @@ function addBookToLibrary(e) {
     const title = document.getElementById("title").value;
     const author = document.getElementById("author").value;
     const pageCount = document.getElementById("pageCount").value;
-    const readStatus = document.getElementById("readStatus").checked ? "read" : "not read";
+    const readStatus = document.getElementById("readStatus").checked ? "Read" : "Not Read";
 
     const newBook = new Book(title, author, pageCount, readStatus);
     myLibrary.push(newBook);
 
+    e.target.reset();
+
     closeForm(e);
     displayBooks();
 }
-
-const book1 = new Book("The Hobbit", "J.R.R Tolkien", 318, "not read");
-const book2 = new Book("Harry Potter and the Goblet of Fire", "J.K Rowling", 636, "read");
-const book3 = new Book("Thomas Calculus", "George B. Thomas", 1676, "read");
-const book4 = new Book("Thomas Calculus", "George B. Thomas", 1676, "read");
-
-myLibrary.push(book1);
-myLibrary.push(book2);
-myLibrary.push(book3);
-myLibrary.push(book4);
 
 function displayBooks() {
     booksContainer.innerHTML = "";
@@ -45,6 +37,13 @@ function displayBooks() {
         const bookHTML = createBook(book);
         booksContainer.appendChild(bookHTML);
     })
+
+    if (myLibrary.length === 0) {
+        const noBooksSentence = document.createElement("p");
+        noBooksSentence.textContent = "No books yet...";
+        noBooksSentence.style.cssText = "color: white; font-size: 1.25rem; text-align: center; grid-column: 2/3;";
+        booksContainer.appendChild(noBooksSentence);
+    }
 }
 
 function createBook(bookObj) {
@@ -65,8 +64,12 @@ function createBook(bookObj) {
     bookPages.textContent = `${bookObj.pageCount} pages`;
 
     // Read status of the book
-    const bookReadStatus = document.createElement("p");
+    const bookReadStatus = document.createElement("button");
     bookReadStatus.textContent = bookObj.readStatus;
+    bookContainer.style.background = bookObj.readStatus === "Read" 
+                                        ? "linear-gradient(to right, #4cb860, #3cd3ad)"
+                                        : "linear-gradient(to right, #3e5151, #decba4)";
+    bookReadStatus.addEventListener("click", changeReadStatusHandler);
 
     // Create cross for the book
     const crossBtn = document.createElement("button");
@@ -98,8 +101,6 @@ function closeForm(e) {
 }
 
 function deleteBookHandler(e) {
-    console.log("Open");
-
     const bookIndex = e.target.getAttribute("data-index");
 
     modal.style.display = "block";
@@ -116,6 +117,17 @@ function deleteBookHandler(e) {
     };
 }
 
+function changeReadStatusHandler(e) {
+    const bookCard = e.target.parentElement
+    if (e.target.textContent === "Read") {
+        bookCard.style.background = "linear-gradient(to right, #3e5151, #decba4)";
+        e.target.textContent = "Not Read";
+    } else {
+        bookCard.style.background = "linear-gradient(to right, #4cb860, #3cd3ad)";
+        e.target.textContent = "Read";
+    }
+}
+
 const booksContainer = document.querySelector(".books-container");
 const addBookBtn = document.querySelector(".add-book-btn");
 const modal = document.querySelector(".modal");
@@ -128,5 +140,4 @@ modal.addEventListener("click", closeForm);
 closeFormBtn.addEventListener("click", closeForm);
 addBookForm.addEventListener("submit", addBookToLibrary);
 
-// Might need to remove later
 displayBooks();
